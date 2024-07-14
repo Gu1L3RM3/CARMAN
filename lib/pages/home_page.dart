@@ -1,7 +1,7 @@
 import 'package:carman/components/custom_nav_bar.dart';
-import 'package:carman/config_page.dart';
-import 'package:carman/garage_page.dart';
-import 'package:carman/notify_page.dart';
+import 'package:carman/pages/config_page.dart';
+import 'package:carman/pages/garage_page.dart';
+import 'package:carman/pages/notify_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: PageView(
         controller: pc,
-        
         onPageChanged: setPaginaAtual,
         children: const[
           NotifyPage(),
@@ -44,6 +43,7 @@ class _HomePageState extends State<HomePage> {
           ConfigPage()
         ],
         ),
+      
       bottomNavigationBar: CustomNavBar(paginaAtual: paginaAtual, pc: pc)
     );
   }
