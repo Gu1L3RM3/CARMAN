@@ -1,117 +1,129 @@
+import 'package:carman/components/custom_form.dart';
 import 'package:carman/components/custom_input_text.dart';
-import 'package:carman/models/car_list.dart';
+import 'package:carman/models/carro/car_list.dart';
+import 'package:carman/models/carro/caracter_car.dart';
+import 'package:carman/utils/validations_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-//TODO mudar cor do botão para voltar
-class AddCarPage extends StatefulWidget {
-  const AddCarPage({super.key});
 
-  @override
-  State<AddCarPage> createState() => _AddCarPageState();
-}
+class AddCarPage extends StatelessWidget with ValidationsMixin{
+  
+  AddCarPage({super.key});
 
-class _AddCarPageState extends State<AddCarPage> {
-  final _formKey=GlobalKey<FormState>();
   final _formData=<String,Object>{};
-
-  void _submitForm(){
-    final isValid=_formKey.currentState?.validate()??false;
-    if(!isValid){
-      return;
-    }
-    _formKey.currentState?.save();
-    Provider.of<CarList>(
-      
-      context,
-      listen:false,
-    ).adicionarCarroFromData(_formData);
-    Navigator.of(context).pop();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        
-        title: const Text('Adicionar Carro'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: _submitForm,)
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: _formKey,
-          child:ListView(
-            children: [//TODO reduzir o código
-              CustomInputText(hintText: 'Modelo', 
+  
+    return  CustomForm(
+        title: 'Adicionar Carro',
+        showButtons: false,
+        formData: _formData,
+        addObjectFromData:Provider.of<CarList>(context,listen: false).addObjectFromData ,
+        children:<Widget> [
+            CustomInputText(
+              maxLength: 10,             
+              icon: const Icon(Icons.list),
+              hintText: 'Modelo', 
               labelText: 'Modelo',
-              isKeyNumber: false,
-              isDone: false,
-              onSaved: (modelo)=>_formData['modelo']=modelo??'',
-              validate: (_modelo){
-                final modelo =_modelo??'';
-                if(modelo.trim().isEmpty){
-                  return 'Modelo é obrigatório';
-                }
-                return null;
-              },
-              
+              onSaved: (modelo)=>_formData[Carro.modeloName]=modelo??'',
+              validate: isNotEmpty,
+            
+            ),
+            CustomInputText(
+              //TODO:colocar opções com icones das marcas
+              maxLength: 12,
+              icon:const Icon(Icons.factory),
+              hintText: 'Marca',
+              labelText: 'Marca',
+              onSaved: (marca)=>_formData[Carro.marcaName]=marca ?? '',
+              validate: isNotEmpty,
+            
+        
+            ),
+            CustomInputText(
+              maxLength: 10,
+              icon: const Icon(Icons.local_offer_rounded),
+              hintText: 'Apelido (Opcional)', 
+              labelText: 'Apelido', 
+              onSaved: (apelido)=>_formData[Carro.apelidoName]=apelido??'', 
+              validate: (_){return null;}
               ),
-              CustomInputText(hintText: 'Marca'
-              , labelText: 'Marca', 
-              isKeyNumber: false,
-              isDone: false,
-              onSaved: (marca)=>_formData['marca']=marca ?? '',
-              validate: (_marca){
-                final marca=_marca??'';
-                if (marca.trim().isEmpty){
-                  return 'Marca é obrigatório';
-                }
-                return null;
-              },
+            CustomInputText(
               
-
-              ),
-              CustomInputText(
-                hintText: 'Apelido (Opcional)', 
-                labelText: 'Apelido', 
-                isKeyNumber: false, 
-                isDone: false,
-                onSaved: (apelido)=>_formData['apelido']=apelido??'', 
-                validate: (_apelido){
-                  final apelido=_apelido??'';
-                  if (apelido.trim().isEmpty){
-                    return null;
-                  }
-                  return null;
-                }
-                ),
-              CustomInputText(hintText: 'Ano', //TODO: tirar o nextFileld desse 
+              hintText: 'Ano', 
+              icon: const Icon(Icons.edit_calendar_rounded),
               labelText: 'Ano', 
               isKeyNumber: true,
-              isDone: true,
-              onSaved: (ano) =>_formData['ano']=ano ?? '' ,
+              digitsOnly: true,
+              onSaved: (ano) =>_formData[Carro.anoName]=int.parse(ano ?? '') ,
               validate: (_ano) {
-                final ano=_ano ?? '';
-                final anoInt=int.parse(ano.trim());
-                final anoAtual=DateTime.now().year;
-                if (ano.trim().isEmpty){
-                  return 'Ano é obrigatório';
-                }
-                else if(anoInt>anoAtual || anoInt<1960){
-                  return "Ano inválido";
-                }
-                return null;
-                
-              },)
-            ],
-            ) ,),
-      )
+              final ano=_ano ?? '';
+              if (ano.trim().isEmpty){
+                return 'Ano é obrigatório';
+              }
+              if(int.parse(ano.trim())<1960 || int.parse(ano.trim())>DateTime.now().year+1){
+                return 'Ano inválido';
+              }
+              return null;
+              
+            },),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Expanded>[
+                Expanded(
+                  child: CustomInputText(
+                    maxLength: 6,
+                    icon: const Icon(Icons.add_road_sharp),
+                    hintText: 'Odômetro', 
+                    labelText: 'Odômetro',
+                    descricaoHelper: '''
+Insira quantos quilômetros rodados tem seu carro''',
+                    isHelper: true,
+                    isKeyNumber: true, 
+                    digitsOnly: true,
+                    onSaved: (odometro)=>_formData[Carro.odometroName]=int.parse(odometro??''), 
+                    validate: isNotEmpty,
+                    ),
+                ),
+                Expanded(
+                  child: CustomInputText(
+                      maxLength: 6,
+                      hintText: "km/mês", 
+                      labelText: "km/mês", 
+                      descricaoHelper:
+'''Insira quantos quilômetros você anda por mês.
+Não se preocupe em dar valores exatos.
+Você pode alterar esse valor posteriormente''' ,
+                      isDone: true, 
+                      isKeyNumber: true, 
+                      digitsOnly: true, 
+                      isHelper:true,
+                      onSaved: (mediaKm)=>_formData[Carro.mediaKmName]=int.parse(mediaKm ??''), 
+                      // ignore: no_leading_underscores_for_local_identifiers
+                      validate:(_mediaKm){
+                        final mediaKm=_mediaKm??'';
+                        if(mediaKm.trim().isEmpty){
+                          return "Km/mês é obrigatório";
+                        }
+                        if(int.parse(mediaKm) ==0){
+                          return "Km/mês inválido";
+                        }
+                        return null;
+
+                      } ),
+                ),
+              ],
+            ),
+            
+            
+            
+            
+          ],
+          ) ;
+          
       
-    );
+    
   }
 }

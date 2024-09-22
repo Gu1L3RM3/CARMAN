@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+
 
 class CustomNavBar extends StatelessWidget {
   final int  paginaAtual;
@@ -7,20 +9,24 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
+        minimum:const  EdgeInsets.only(bottom: 10.0,left: 10.0,right: 10.0),
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-          decoration:const BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(40, 36, 67, 1),
-                offset: Offset(0, 8),
-                blurRadius: 30)
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(spreadRadius: 0,blurRadius: 10,offset: Offset(0, 5))
             ]
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
             child: BottomNavigationBar(
+              elevation: 5,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              enableFeedback: false,
+              unselectedItemColor:Theme.of(context).unselectedWidgetColor,
               currentIndex: paginaAtual, 
               iconSize: 40,
               items:const [
