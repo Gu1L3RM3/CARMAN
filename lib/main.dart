@@ -1,11 +1,12 @@
 import 'package:carman/models/providers.dart';
-import 'package:carman/models/theme_data.dart';
+import 'package:carman/utils/theme_data.dart';
 import 'package:carman/pages/home_page.dart';
 import 'package:carman/utils/app_routes.dart';
 import 'package:carman/utils/notification_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
 
 
@@ -36,8 +37,16 @@ class CarmanApp extends StatelessWidget {
   const CarmanApp({super.key});
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);//fixa na vertical
     
     return   MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales:const  [
+        Locale('pt','BR'),
+      ],
         title:'Carman',
         navigatorKey: navigatorKey,
         

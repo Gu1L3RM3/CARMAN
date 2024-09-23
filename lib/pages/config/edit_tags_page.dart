@@ -1,15 +1,21 @@
-import 'package:carman/components/custom_alert_dialog.dart';
 import 'package:carman/components/custom_circular_progress.dart';
 import 'package:carman/components/list_view_objects.dart';
-import 'package:carman/components/tags_edit.dart';
+import 'package:carman/components/uso_geral/custom_alert_dialog.dart';
+
+import 'package:carman/components/config/tags_edit.dart';
 import 'package:carman/models/config_service.dart';
 import 'package:carman/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class EditTagsPage extends StatelessWidget {
+class EditTagsPage extends StatefulWidget {
   const EditTagsPage({super.key});
 
+  @override
+  State<EditTagsPage> createState() => _EditTagsPageState();
+}
+
+class _EditTagsPageState extends State<EditTagsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,13 +44,13 @@ class EditTagsPage extends StatelessWidget {
       ),
       body:Padding(
         padding: const EdgeInsets.only(top:8.0),
-        child: FutureBuilder(
-          future: Provider.of<ConfigService>(context,listen: true).initRepository(),
-          builder: (context, snapshot) {
-            return snapshot.connectionState==ConnectionState.waiting
-            ?const CustomCircularProgress()
-            :Consumer<ConfigService>(
-              builder: (context, value, child) => ListViewObjects(
+        child: Consumer<ConfigService>(
+          builder: (context, value, child) => FutureBuilder(
+            future: value.initRepository(),
+            builder: (context,snapshot) {
+              return snapshot.connectionState==ConnectionState.waiting
+              ?const CustomCircularProgress()
+              :ListViewObjects(
                 isListEmpty: false,
                 floatingButtonRoute: AppRoutes.addServicePage,
                 lista: value.tags,
@@ -65,11 +71,9 @@ class EditTagsPage extends StatelessWidget {
                     ),
                   );
                   
-                },),
-            );
-
-          },
-          
+                },);
+            }
+          ),
         ),
       )
     );

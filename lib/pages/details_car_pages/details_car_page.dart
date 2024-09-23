@@ -1,4 +1,4 @@
-import 'package:carman/components/curved_nav_bar.dart';
+import 'package:carman/components/navigators/curved_nav_bar.dart';
 import 'package:carman/models/carro/car_list.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/pages/details_car_pages/edit_details_car_page.dart';

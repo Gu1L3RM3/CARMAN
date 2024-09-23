@@ -1,4 +1,4 @@
-import 'package:carman/components/custom_input_text.dart';
+import 'package:carman/components/uso_geral/formularios/custom_input_text.dart';
 import 'package:carman/models/config_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

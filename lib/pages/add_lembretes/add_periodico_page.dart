@@ -1,7 +1,7 @@
-import 'package:carman/components/custom_drop_down.dart';
-import 'package:carman/components/custom_form.dart';
-import 'package:carman/components/custom_input_text.dart';
-import 'package:carman/components/select_tag.dart';
+import 'package:carman/components/uso_geral/custom_drop_down.dart';
+import 'package:carman/components/uso_geral/formularios/custom_form.dart';
+import 'package:carman/components/uso_geral/formularios/custom_input_text.dart';
+import 'package:carman/components/lembretes/select_tag.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/models/lembrete/caracter_lembrete.dart';
 import 'package:carman/utils/validations_mixin.dart';

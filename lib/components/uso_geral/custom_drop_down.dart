@@ -1,4 +1,4 @@
-import 'package:carman/components/custom_alert_dialog.dart';
+import 'package:carman/components/uso_geral/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropDown extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:carman/pages/add_car_page.dart';
+import 'package:carman/pages/garagem/add_car_page.dart';
 import 'package:carman/pages/config/add_tag_page.dart';
 import 'package:carman/pages/config/edit_tags_page.dart';
-import 'package:carman/pages/details_car_page.dart';
+import 'package:carman/pages/details_car_pages/details_car_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {

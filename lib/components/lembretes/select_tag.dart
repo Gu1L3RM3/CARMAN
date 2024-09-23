@@ -1,5 +1,5 @@
 
-import 'package:carman/components/custom_drop_down.dart';
+import 'package:carman/components/uso_geral/custom_drop_down.dart';
 import 'package:carman/main.dart';
 import 'package:carman/models/config_service.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,8 @@
-import 'package:carman/components/custom_nav_bar.dart';
+import 'package:carman/components/navigators/custom_nav_bar.dart';
 import 'package:carman/pages/config/config_page.dart';
 import 'package:carman/pages/garage_page.dart';
-import 'package:carman/pages/notify_page.dart';
+
+import 'package:carman/pages/notify/notify_page.dart';
 import 'package:flutter/material.dart';
 
 

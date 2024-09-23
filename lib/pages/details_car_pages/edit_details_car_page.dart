@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:camera_camera/camera_camera.dart';
-import 'package:carman/components/custom_button.dart';
 import 'package:carman/components/custom_circular_progress.dart';
-import 'package:carman/components/custom_form.dart';
-import 'package:carman/components/custom_input_text.dart';
+import 'package:carman/components/uso_geral/custom_button.dart';
+
+import 'package:carman/components/uso_geral/formularios/custom_form.dart';
+import 'package:carman/components/uso_geral/formularios/custom_input_text.dart';
 import 'package:carman/models/carro/car_list.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/utils/validations_mixin.dart';

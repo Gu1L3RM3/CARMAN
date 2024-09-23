@@ -1,4 +1,4 @@
-import 'package:carman/components/custom_button.dart';
+import 'package:carman/components/uso_geral/custom_button.dart';
 import 'package:carman/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 

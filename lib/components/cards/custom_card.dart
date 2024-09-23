@@ -1,4 +1,4 @@
-import 'package:carman/components/custom_alert_dialog.dart';
+import 'package:carman/components/uso_geral/custom_alert_dialog.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/models/lembrete/lembrete_agendado_list.dart';
 import 'package:carman/models/lembrete/lembrete_km_list.dart';

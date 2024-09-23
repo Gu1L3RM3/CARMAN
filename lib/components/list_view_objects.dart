@@ -1,4 +1,4 @@
-import 'package:carman/components/floating_add_object.dart';
+import 'package:carman/components/uso_geral/floating_add_object.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
