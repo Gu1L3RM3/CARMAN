@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:camera_camera/camera_camera.dart';
+import 'package:carman/components/custom_button.dart';
 import 'package:carman/components/custom_circular_progress.dart';
 import 'package:carman/components/custom_form.dart';
 import 'package:carman/components/custom_input_text.dart';
@@ -5,6 +8,8 @@ import 'package:carman/models/carro/car_list.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/utils/validations_mixin.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class EditDetailsCarPage extends StatefulWidget  {
@@ -16,7 +21,13 @@ class EditDetailsCarPage extends StatefulWidget  {
 }
 
 class _EditDetailsCarPageState extends State<EditDetailsCarPage>with ValidationsMixin {
+
+  File? photo;
+  final picker=ImagePicker();
+  final crop=ImageCropper();
+
   final  _formData=<String, Object>{};
+  
   //TODO:otimizar isso
   final TextEditingController apelidoController=TextEditingController();
   final TextEditingController odometroController=TextEditingController();
@@ -25,8 +36,67 @@ class _EditDetailsCarPageState extends State<EditDetailsCarPage>with Validations
   final TextEditingController modeloController=TextEditingController();
   final TextEditingController kmMedioController=TextEditingController();
 
+  Future<CroppedFile?> cropper(file)async{
+    return await crop.cropImage(
+        sourcePath: file.path,
+        uiSettings: [
+          AndroidUiSettings(
+            cropStyle: CropStyle.circle,
+            toolbarTitle: 'Cropper',
+            showCropGrid: false,
+            
+            activeControlsWidgetColor: Colors.cyan,
+          )
+        ],);
+  }
+  void showPreview(file)async{
+    final croppedPhoto=await cropper(file);
+        
+    if(croppedPhoto!=null){
+      setState(() {
+        photo=File(croppedPhoto.path);
+        Navigator.pop(context);
+      });
+      
+    }
+
+
+  }
+
+
+  void openCamera(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_)=>CameraCamera(
+          onFile: (file){
+            showPreview(file);
+          }
+          )
+          )
+
+     );
+  }
+
+  Future getPhotoFromGallery()async {
+    final file=await picker.pickImage(source: ImageSource.gallery);
+    
+    
+    if(file!=null){
+      final croppedFile=await cropper(file);
+        if(croppedFile!=null){
+          setState(() {photo=File(croppedFile.path);});
+
+        }
+        
+
+    }
+  }
+
+
   @override
   void initState() {
+    photo=File(widget.carro.imageCar);
     apelidoController.text=widget.carro.apelido;
     marcaController.text=widget.carro.marca;
     odometroController.text=widget.carro.odometro.toString();
@@ -39,6 +109,7 @@ class _EditDetailsCarPageState extends State<EditDetailsCarPage>with Validations
 
   @override
   Widget build(BuildContext context) {
+    _formData[Carro.imagePath]=photo!=null?photo!.path:'';
     
     
     return FutureBuilder(
@@ -53,6 +124,44 @@ class _EditDetailsCarPageState extends State<EditDetailsCarPage>with Validations
           formData: _formData,
           addObjectFromData:Provider.of<CarList>(context,listen: false).editObjectFromData,
           children:<Widget> [
+              FittedBox(
+              fit: BoxFit.contain,
+              alignment: Alignment.center,
+              child: CircleAvatar(
+                backgroundImage: (_formData[Carro.imagePath] as String).isNotEmpty?FileImage(File(_formData[Carro.imagePath] as String)):null,
+                radius: 80.0,
+                child: (_formData[Carro.imagePath] as String).isNotEmpty
+                ?null
+                :const Icon(Icons.drive_eta,size: 80.0,),
+                ),
+            ),
+            Container(
+              margin:const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  
+                  CustomButton(
+                    icon: const Icon(Icons.photo_camera),
+                    onPressed: (){
+                      
+                      openCamera();},
+                    label: "Tirar Foto"),
+                  ElevatedButton(
+                    onPressed: (){
+                      if((_formData[Carro.imagePath]as String).isNotEmpty){setState(() {
+
+                    photo=null;
+                  });}},
+                  child: const Icon(Icons.delete),
+                  ),
+                  CustomButton(onPressed: ()=>getPhotoFromGallery(),
+                   margin:4.0,
+                   label: "Galeria",
+                   icon:const Icon(Icons.link) ,),
+                ],
+              ),
+            ),
               CustomInputText(
                 controller: modeloController,
                 maxLength: 10,             

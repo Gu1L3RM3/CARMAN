@@ -83,7 +83,7 @@ class LembretePeriodicoList extends ObjectList<LembretePeriodico>{
       id: id,
       idNotificacao:idNotificacao
       );
-    var dataInsert=data;//TODO:adicionar isso no ObjectList
+    var dataInsert=data;
     dataInsert[Lembrete.idName]=id;
     dataInsert[Lembrete.idNotificacaoName]=idNotificacao;
     await insert(tableName, dataInsert);

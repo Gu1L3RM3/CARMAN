@@ -18,6 +18,7 @@ Future<void> main(List<String> args) async {
   await NotificationController.init();
   
   final  NotificationAppLaunchDetails? details=await NotificationController.plugin.getNotificationAppLaunchDetails();
+  
   if (details?.didNotificationLaunchApp ?? false){
     //initialRoute=AppRoutes.adicionarCarro;
     if(details?.notificationResponse?.actionId=="confirm"){

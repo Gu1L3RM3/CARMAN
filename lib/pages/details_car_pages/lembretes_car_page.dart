@@ -20,11 +20,15 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 
-class LembretesCarPage extends StatelessWidget {
+class LembretesCarPage extends StatefulWidget {
   final Carro carro;
   const LembretesCarPage({super.key,required this.carro});
-  
 
+  @override
+  State<LembretesCarPage> createState() => _LembretesCarPageState();
+}
+
+class _LembretesCarPageState extends State<LembretesCarPage> {
   @override
   Widget build(BuildContext context) {
     
@@ -44,7 +48,7 @@ class LembretesCarPage extends StatelessWidget {
           final  lembretePeriodicoList=Provider.of<LembretePeriodicoList>(context,listen:true);
           final  lembreteKmList=Provider.of<LembreteKmList>(context,listen:true);
           
-          List lembretesList=LembreteMain.getLembretesCar(carro: carro, lembreteAgendadoList: lembreteAgendadoList, lembretePeriodicoList: lembretePeriodicoList, lembreteKmList: lembreteKmList);
+          List lembretesList=LembreteMain.getLembretesCar(carro: widget.carro, lembreteAgendadoList: lembreteAgendadoList, lembretePeriodicoList: lembretePeriodicoList, lembreteKmList: lembreteKmList);
           
           return snapshot.connectionState==ConnectionState.waiting?  const CustomCircularProgress()
       :Consumer4<LembreteAgendadoList,LembreteKmList,LembretePeriodicoList,ConfigService>(
@@ -57,7 +61,7 @@ class LembretesCarPage extends StatelessWidget {
                 onTap: ()=>Navigator.push(
               context,  
               PageTransition(
-                child:AddPeriodicoPage(addObjectFromData: periodicoList.addObjectFromData,carro: carro),
+                child:AddPeriodicoPage(addObjectFromData: periodicoList.addObjectFromData,carro: widget.carro),
                 type: PageTransitionType.bottomToTop,
                 duration: Durations.medium2
                )
@@ -68,7 +72,7 @@ class LembretesCarPage extends StatelessWidget {
                 onTap: ()=>Navigator.push(
               context,  
               PageTransition(
-                child:AddAgendadoPage(addObjectFromData: agendadoList.addObjectFromData,carro: carro),
+                child:AddAgendadoPage(addObjectFromData: agendadoList.addObjectFromData,carro: widget.carro),
                 type: PageTransitionType.bottomToTop,
                 duration: Durations.medium2
                )
@@ -79,7 +83,7 @@ class LembretesCarPage extends StatelessWidget {
                 onTap: ()=>Navigator.push(
               context,  
               PageTransition(
-                child:AddKmRodadoPage(addObjectFromData: kmList.addObjectFromData,carro: carro),
+                child:AddKmRodadoPage(addObjectFromData: kmList.addObjectFromData,carro: widget.carro),
                 type: PageTransitionType.bottomToTop,
                 duration: Durations.medium2
                )

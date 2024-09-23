@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:carman/components/cards/custom_card.dart';
 import 'package:carman/components/custom_circular_progress.dart';
 import 'package:carman/components/empty_list.dart';
@@ -48,6 +49,10 @@ class _GaragePageState extends State<GaragePage> {
                 AppRoutes.mostrarCarroDetalhes,
                arguments: carros[index]),
               icon: Icons.drive_eta,
+              avatar: carros[index].imageCar.isNotEmpty?CircleAvatar(
+                backgroundImage: FileImage(File(carros[index].imageCar)),
+                radius: 60.0,
+                ):null,
               principalText:carros[index].apelido.isEmpty? carros[index].marca:carros[index].apelido,
               leftText: carros[index].modelo,
               righttext: carros[index].ano.toString(),

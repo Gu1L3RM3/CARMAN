@@ -21,7 +21,7 @@ class _AddAgendadoPageState extends State<AddAgendadoPage> with ValidationsMixin
   TextEditingController dateTimeController=TextEditingController();
   TextEditingController timeOfDayController=TextEditingController();
   @override
-  Widget build(BuildContext context) {//TODO:Mudar as Strings estáticas para os Caracter Lembretes
+  Widget build(BuildContext context) {
     formData[Lembrete.carroIdName]=widget.carro.id;
     return CustomForm(
       showButtons: false,

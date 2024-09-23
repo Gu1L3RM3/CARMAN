@@ -79,6 +79,7 @@ class DB{
       ${Carro.marcaName} TEXT,
       ${Carro.modeloName} TEXT,
       ${Carro.apelidoName} TEXT,
+      ${Carro.imagePath} TEXT,
       ${Carro.anoName} INT,
       ${Carro.odometroName} INT,
       ${Carro.mediaKmName} INT

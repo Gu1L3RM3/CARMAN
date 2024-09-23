@@ -16,6 +16,7 @@ class CarList extends ObjectList<Carro> {
     id:item[Carro.idName],
     mediaKm: item[Carro.mediaKmName],
     odometro: item[Carro.odometroName],
+    imageCar: item[Carro.imagePath],
    )).toList();
   }
   @override
@@ -28,7 +29,8 @@ class CarList extends ObjectList<Carro> {
       apelido: data[Carro.apelidoName] as String,
       ano: data[Carro.anoName]as int,
       odometro:data[Carro.odometroName]as int,
-      mediaKm:data[Carro.mediaKmName]as int
+      mediaKm:data[Carro.mediaKmName]as int,
+      imageCar: data[Carro.imagePath] as String,
        );
     var dataInsert=data;
     dataInsert[Carro.idName]=id;
@@ -39,7 +41,7 @@ class CarList extends ObjectList<Carro> {
   }
 
   void editObjectFromData( Map<String,Object> data)async{
-    //TODO:alterar na base de dados
+  
     int id=data[Carro.idName]as int ;
     for (Carro car in lista) {
         if(car.id==id){
@@ -49,6 +51,7 @@ class CarList extends ObjectList<Carro> {
           car.mediaKm=data[Carro.mediaKmName] as int;
           car.odometro=data[Carro.odometroName]as int;
           car.modelo=data[Carro.modeloName] as String;
+          car.imageCar=data[Carro.imagePath] as String;
         }
     }
     var dataInsert=data;

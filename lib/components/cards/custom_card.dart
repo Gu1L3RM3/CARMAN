@@ -16,11 +16,13 @@ class CustomCard<T> extends StatelessWidget {
   final String leftText;
   final String righttext;
   final String tipoAlert;
+  final Widget? avatar;
   final T object;
   final void  Function(T obj,[BuildContext? context]) removeObjectLista;
   const CustomCard({
     super.key,
     this.ontap,
+    this.avatar,
     required this.object,
     required this.icon,
     required this.principalText,
@@ -28,6 +30,7 @@ class CustomCard<T> extends StatelessWidget {
     required this.righttext,
     required this.tipoAlert,
     required this.removeObjectLista,
+
   });
 
   
@@ -58,7 +61,7 @@ class CustomCard<T> extends StatelessWidget {
           child:  Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Icon(icon,size:80 ,),
+              avatar??Icon(icon,size:80 ,),
               Column(
                 children: <Widget>[
                   texto(text: principalText),

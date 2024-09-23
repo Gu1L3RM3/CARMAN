@@ -1,27 +1,140 @@
+import 'dart:io';
+import 'package:camera_camera/camera_camera.dart';
+import 'package:carman/components/custom_button.dart';
 import 'package:carman/components/custom_form.dart';
 import 'package:carman/components/custom_input_text.dart';
 import 'package:carman/models/carro/car_list.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/utils/validations_mixin.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 
-class AddCarPage extends StatelessWidget with ValidationsMixin{
+class AddCarPage extends StatefulWidget {
   
-  AddCarPage({super.key});
+  const AddCarPage({super.key});
+
+  @override
+  State<AddCarPage> createState() => _AddCarPageState();
+}
+
+class _AddCarPageState extends State<AddCarPage> with ValidationsMixin {
+  File? photo;
+  final picker=ImagePicker();
+  final crop=ImageCropper();
+
+
+  Future<CroppedFile?> cropper(file)async{
+    return await crop.cropImage(
+        sourcePath: file.path,
+        uiSettings: [
+          AndroidUiSettings(
+            cropStyle: CropStyle.circle,
+            toolbarTitle: 'Cropper',
+            showCropGrid: false,
+            
+            activeControlsWidgetColor: Colors.cyan,
+          )
+        ],);
+  }
+  void showPreview(file)async{
+    final croppedPhoto=await cropper(file);
+        
+    if(croppedPhoto!=null){
+      setState(() {
+        photo=File(croppedPhoto.path);
+        Navigator.pop(context);
+      });
+      
+    }
+
+
+  }
+
+
+  void openCamera(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_)=>CameraCamera(
+          onFile: (file){
+            showPreview(file);
+          }
+          )
+          )
+
+     );
+  }
+
+  Future getPhotoFromGallery()async {
+    final file=await picker.pickImage(source: ImageSource.gallery);
+    
+    
+    if(file!=null){
+      final croppedFile=await cropper(file);
+        if(croppedFile!=null){
+          setState(() {photo=File(croppedFile.path);});
+
+        }
+        
+
+    }
+  }
+
+
+
 
   final _formData=<String,Object>{};
 
   @override
   Widget build(BuildContext context) {
-  
+    
+    _formData[Carro.imagePath]=photo!=null?photo!.path:'';
+    
     return  CustomForm(
         title: 'Adicionar Carro',
         showButtons: false,
         formData: _formData,
         addObjectFromData:Provider.of<CarList>(context,listen: false).addObjectFromData ,
         children:<Widget> [
+            FittedBox(
+              fit: BoxFit.contain,
+              alignment: Alignment.center,
+              child: CircleAvatar(
+                backgroundImage: photo!=null?FileImage(photo!):null,
+                radius: 80.0,
+                child: photo!=null
+                ?null
+                :const Icon(Icons.drive_eta,size: 80.0,),
+                ),
+            ),
+            Container(
+              margin:const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  
+                  CustomButton(
+                    icon: const Icon(Icons.photo_camera),
+                    onPressed: (){
+                      
+                      openCamera();},
+                    label: "Tirar Foto"),
+                  ElevatedButton(
+                    onPressed: (){setState(() {
+                    photo=null;
+                  });},
+                  child: const Icon(Icons.delete),
+                  ),
+                  CustomButton(onPressed: ()=>getPhotoFromGallery(),
+                   margin:4.0,
+                   label: "Galeria",
+                   icon:const Icon(Icons.link) ,),
+                ],
+              ),
+            ),
             CustomInputText(
               maxLength: 10,             
               icon: const Icon(Icons.list),
@@ -31,6 +144,7 @@ class AddCarPage extends StatelessWidget with ValidationsMixin{
               validate: isNotEmpty,
             
             ),
+            
             CustomInputText(
               //TODO:colocar opções com icones das marcas
               maxLength: 12,
@@ -51,7 +165,6 @@ class AddCarPage extends StatelessWidget with ValidationsMixin{
               validate: (_){return null;}
               ),
             CustomInputText(
-              
               hintText: 'Ano', 
               icon: const Icon(Icons.edit_calendar_rounded),
               labelText: 'Ano', 

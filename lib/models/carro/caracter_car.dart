@@ -7,6 +7,7 @@ class Carro {
   int ano;
   int odometro;
   int mediaKm;
+  String imageCar;
   Carro({
     required this.id,
     required this.marca,
@@ -14,7 +15,9 @@ class Carro {
     required this.apelido,
     required this.ano,
     required this.odometro,
-    required this.mediaKm
+    required this.mediaKm,
+    required this.imageCar,
+    
 
    
    });
@@ -26,4 +29,5 @@ class Carro {
    static String anoName='ano';
    static String odometroName='odometro';
    static String mediaKmName='mediaKm';
+   static String imagePath='imagePath';
 }

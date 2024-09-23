@@ -271,6 +271,16 @@ class NotificationController{
     }
     return scheduledDate.add(const Duration(days: 182));
   }
+  static Future detailsNotifications()async{
+    var details =await plugin.getActiveNotifications();
+    print(details);
+    
+      
+
+    
+
+
+  }
   
 
 }
