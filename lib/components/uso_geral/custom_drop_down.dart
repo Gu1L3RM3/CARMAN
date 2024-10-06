@@ -38,9 +38,11 @@ class CustomDropDown extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10.0),
       child: DropdownButtonFormField(
+        hint: const Text('Selecione um serviço'),
         
         enableFeedback: true,  
         items:criaLista(),
+        
         onChanged: (value){},
         autovalidateMode:AutovalidateMode.onUserInteraction ,
           decoration:  InputDecoration(

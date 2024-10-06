@@ -4,7 +4,6 @@ import 'package:carman/utils/notification_service.dart';
 import 'package:flutter/material.dart';
 
 class LembreteAgendadoList extends ObjectList<LembreteAgendado>{
-  
   static String tableName='LembreteAgendadoList';
   Future<int> criaNotificacao({required String tag,required int carroId,required DateTime dateTime,required TimeOfDay timeOfDay})async{
     return await NotificationController.showScheduleNotificationWithActions(
@@ -54,8 +53,6 @@ class LembreteAgendadoList extends ObjectList<LembreteAgendado>{
     data[Lembrete.idNotificacaoName]=idNotificacao;
     await insert(tableName, dataInsert);
     adicionarObject(newLembrete);
-
-
   }
   
   @override

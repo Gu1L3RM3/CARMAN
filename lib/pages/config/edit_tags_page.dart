@@ -1,5 +1,5 @@
-import 'package:carman/components/custom_circular_progress.dart';
-import 'package:carman/components/list_view_objects.dart';
+import 'package:carman/components/uso_geral/custom_circular_progress.dart';
+import 'package:carman/components/uso_geral/list_view_objects.dart';
 import 'package:carman/components/uso_geral/custom_alert_dialog.dart';
 
 import 'package:carman/components/config/tags_edit.dart';

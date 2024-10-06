@@ -8,8 +8,17 @@ class FinancesCarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text('página de finanças'),
+    return Scaffold(
+      
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            
+            Container(),//lista de ganhos e gastos
+
+          ],
+        ),
+      ),
     );
   }
 }

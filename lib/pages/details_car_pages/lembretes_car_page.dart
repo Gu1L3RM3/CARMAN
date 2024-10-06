@@ -1,8 +1,7 @@
 import 'package:carman/components/cards/custom_card.dart';
-import 'package:carman/components/custom_circular_progress.dart';
-import 'package:carman/components/empty_list.dart';
-import 'package:carman/components/list_view_objects.dart';
-
+import 'package:carman/components/uso_geral/custom_circular_progress.dart';
+import 'package:carman/components/uso_geral/empty_list.dart';
+import 'package:carman/components/uso_geral/list_view_objects.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/models/config_service.dart';
 import 'package:carman/models/lembrete/caracter_lembrete.dart';
@@ -49,10 +48,11 @@ class _LembretesCarPageState extends State<LembretesCarPage> {
             return snapshot.connectionState==ConnectionState.waiting?  const CustomCircularProgress()
             :  ListViewObjects(
               floatingActionButton: SpeedDial(
+                backgroundColor: Colors.blueGrey[700],
                 animatedIcon: AnimatedIcons.add_event,
-                
                 children:<SpeedDialChild> [
                   SpeedDialChild(
+                    label: "Lembrete que se repete",
                     onTap: ()=>Navigator.push(
                   context,  
                   PageTransition(
@@ -64,6 +64,7 @@ class _LembretesCarPageState extends State<LembretesCarPage> {
                     child: Icon(LembretePeriodico.icon),
                   ),
                   SpeedDialChild(
+                    label: "Lembrete agendado",
                     onTap: ()=>Navigator.push(
                   context,  
                   PageTransition(
@@ -75,6 +76,7 @@ class _LembretesCarPageState extends State<LembretesCarPage> {
                     child:Icon(LembreteAgendado.icon),
                   ),
                   SpeedDialChild(
+                    label: "Lembrete por Km rodado",
                     onTap: ()=>Navigator.push(
                   context,  
                   PageTransition(

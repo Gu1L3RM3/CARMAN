@@ -35,6 +35,7 @@ class CarList extends ObjectList<Carro> {
     var dataInsert=data;
     dataInsert[Carro.idName]=id;
     await insert(tableName, dataInsert);
+    print(lista);
     adicionarObject(newCar);
     notifyListeners();
 

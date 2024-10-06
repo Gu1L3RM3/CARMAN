@@ -14,7 +14,7 @@ class FloatingAddObject extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-
+      backgroundColor: Colors.blueGrey[700],
       onPressed: funcao??(){},
       child: child??const Icon(Icons.add)
       );

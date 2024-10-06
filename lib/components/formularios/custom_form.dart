@@ -50,6 +50,7 @@ class _CustomFormState extends State<CustomForm> {
   Widget build(BuildContext context) {
     return  Scaffold(
       floatingActionButton:widget.showButtons? FloatingActionButton(
+        backgroundColor: Colors.blueGrey[700],
         onPressed: _submitForm,
         child: const Icon(Icons.save)):null,
       appBar:widget.showAppBar? AppBar(

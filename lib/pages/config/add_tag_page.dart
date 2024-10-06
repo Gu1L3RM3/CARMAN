@@ -1,4 +1,4 @@
-import 'package:carman/components/uso_geral/formularios/custom_input_text.dart';
+import 'package:carman/components/formularios/custom_input_text.dart';
 import 'package:carman/models/config_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +9,7 @@ class AddTagPage extends StatefulWidget {
   @override
   State<AddTagPage> createState() => _AddTagPageState();
 }
-//TODO: Arrumar bug
+
 class _AddTagPageState extends State<AddTagPage> {
   final _formKey=GlobalKey<FormState>();
   String newTag='';
@@ -64,10 +64,10 @@ class _AddTagPageState extends State<AddTagPage> {
                             validate: (_tag){
                               final novaTag=_tag??'';
                               if(novaTag.trim().isEmpty){
-                                return 'Tag inválida';
+                                return 'Serviço inválido';
                               }
                               if(value.tagExiste(novaTag.trim())){
-                                return 'Essa tag já existe';
+                                return 'Esse Serviço já existe';
                               }
                               return null;}
                               ),

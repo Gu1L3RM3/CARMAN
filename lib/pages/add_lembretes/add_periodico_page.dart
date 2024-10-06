@@ -1,6 +1,6 @@
 import 'package:carman/components/uso_geral/custom_drop_down.dart';
-import 'package:carman/components/uso_geral/formularios/custom_form.dart';
-import 'package:carman/components/uso_geral/formularios/custom_input_text.dart';
+import 'package:carman/components/formularios/custom_form.dart';
+import 'package:carman/components/formularios/custom_input_text.dart';
 import 'package:carman/components/lembretes/select_tag.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/models/lembrete/caracter_lembrete.dart';
@@ -38,11 +38,11 @@ class _AddPeriodicoPageState extends State<AddPeriodicoPage>with ValidationsMixi
           icon: const Icon(Icons.home_repair_service_rounded),
           onSaved: (tag)=>formData[Lembrete.tagName]=tag??'',
           title: "Ajuda",
-          validate: isNotEmpty,
+          validate: isNull,
           
         ),
         CustomDropDown(
-          validate: isNotEmpty,
+          validate: isNull,
           icon: const Icon(Icons.checklist_outlined),
           onSaved: (tipoIntervalo)=>formData[LembretePeriodico.tipoIntervaloName]=tipoIntervalo??'',
           lista: LembretePeriodico.tipoIntervaloList,

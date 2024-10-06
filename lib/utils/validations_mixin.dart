@@ -3,6 +3,10 @@ mixin ValidationsMixin{
     if(value!.isEmpty)return message ??"Obrigatório";
     return null;
   }
+  String? isNull(String? value,[String? message]){
+    if(value==null)return message??"Obrigatório";
+    return null;
+  }
   String? combine(List<String? Function()> validators){
     for (final func in validators){
       final validation =func();

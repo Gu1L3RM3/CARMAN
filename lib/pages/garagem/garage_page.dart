@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:carman/components/cards/custom_card.dart';
-import 'package:carman/components/custom_circular_progress.dart';
-import 'package:carman/components/empty_list.dart';
-import 'package:carman/components/list_view_objects.dart';
+import 'package:carman/components/uso_geral/custom_circular_progress.dart';
+import 'package:carman/components/uso_geral/empty_list.dart';
+import 'package:carman/components/uso_geral/list_view_objects.dart';
 import 'package:carman/models/carro/car_list.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/utils/app_routes.dart';
@@ -32,6 +32,7 @@ class _GaragePageState extends State<GaragePage> {
         future: Provider.of<CarList>(context,listen: false).initRepository(CarList.tableName),
         builder: (ctx,snapShot) {
           final provider=Provider.of<CarList>(context,listen: true);
+          
           final List<Carro> carros =provider.lista;
           return snapShot.connectionState==ConnectionState.waiting
         ?const CustomCircularProgress()
