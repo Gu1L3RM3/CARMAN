@@ -3,7 +3,7 @@ import 'package:carman/models/carro/car_list.dart';
 import 'package:carman/models/carro/caracter_car.dart';
 import 'package:carman/pages/details_car_pages/edit_details_car_page.dart';
 import 'package:carman/pages/details_car_pages/lembretes_car_page.dart';
-import 'package:carman/pages/details_car_pages/finances_car_page.dart';
+import 'package:carman/pages/details_car_pages/historico_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +33,7 @@ class _DetailsCarPageState extends State<DetailsCarPage> {
     setState(() {
       switch (paginaAtual){
         case 0:
-          textAppBar='Finanças';
+          textAppBar='Histórico';
           backgroundAppBar=mapColor;
           break;
         case 1:
@@ -80,7 +80,7 @@ class _DetailsCarPageState extends State<DetailsCarPage> {
         controller: pc,
         onPageChanged: setPaginaAtual,
         children: [
-          FinancesCarPage(carro:carro),
+          HistoricoPage(carro:carro),
           LembretesCarPage(carro:carro),
           EditDetailsCarPage(carro:carro),
         ],

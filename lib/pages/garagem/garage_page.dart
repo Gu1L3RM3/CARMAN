@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:carman/components/cards/car_card.dart';
 import 'package:carman/components/cards/custom_card.dart';
 import 'package:carman/components/uso_geral/custom_circular_progress.dart';
 import 'package:carman/components/uso_geral/empty_list.dart';
@@ -44,21 +45,22 @@ class _GaragePageState extends State<GaragePage> {
           lista: carros, 
           isListEmpty: provider.isListaEmpty, 
           itemBuilder: (BuildContext context,int index ){
-            return CustomCard<Carro>(
-              object: carros[index],
-              ontap:()=> Navigator.of(context).pushNamed(
-                AppRoutes.mostrarCarroDetalhes,
-               arguments: carros[index]),
-              icon: Icons.drive_eta,
-              avatar: carros[index].imageCar.isNotEmpty?CircleAvatar(
-                backgroundImage: FileImage(File(carros[index].imageCar)),
-                radius: 60.0,
-                ):null,
-              principalText:carros[index].apelido.isEmpty? carros[index].marca:carros[index].apelido,
-              leftText: carros[index].modelo,
-              righttext: carros[index].ano.toString(),
-              tipoAlert: "carro", 
-              removeObjectLista: provider.removeObjectLista,
+
+             return CustomCard<Carro>(
+               object: carros[index],
+               ontap:()=> Navigator.of(context).pushNamed(
+                 AppRoutes.mostrarCarroDetalhes,
+                arguments: carros[index]),
+               icon: Icons.drive_eta,
+               avatar: carros[index].imageCar.isNotEmpty?CircleAvatar(
+                 backgroundImage: FileImage(File(carros[index].imageCar)),
+                 radius: 60.0,
+                 ):null,
+               principalText:carros[index].apelido.isEmpty? carros[index].marca:carros[index].apelido,
+               leftText: carros[index].modelo,
+               righttext: carros[index].ano.toString(),
+               tipoAlert: "carro",
+               removeObjectLista: provider.removeObjectLista,
              
               );
           },
