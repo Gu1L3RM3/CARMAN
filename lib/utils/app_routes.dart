@@ -5,7 +5,7 @@ import 'package:carman/pages/details_car_pages/details_car_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
-  static Widget addCarPage= AddCarPage();
+  static Widget addCarPage= const AddCarPage();
   static Widget editTagsPage=const EditTagsPage();
   static const Widget detailsCarPage=DetailsCarPage();
   static const Widget addServicePage=AddTagPage();

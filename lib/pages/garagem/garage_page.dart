@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:carman/components/cards/car_card.dart';
 import 'package:carman/components/cards/custom_card.dart';
 import 'package:carman/components/uso_geral/custom_circular_progress.dart';
 import 'package:carman/components/uso_geral/empty_list.dart';

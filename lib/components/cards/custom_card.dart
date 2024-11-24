@@ -57,7 +57,6 @@ class CustomCard<T> extends StatelessWidget {
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(6))
             ),
-          
           child:  Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -78,7 +77,7 @@ class CustomCard<T> extends StatelessWidget {
               ),
             
              
-              IconButton(onPressed: (){
+              GestureDetector(onTap: (){
                 showDialog(context: context,
                  builder:(context)=> Consumer3<LembreteAgendadoList,LembreteKmList,LembretePeriodicoList>(
                   builder: (context, agendadoList, kmList, periodicoList, child) => CustomAlertDialog(
@@ -96,7 +95,6 @@ class CustomCard<T> extends StatelessWidget {
                         }
                         for(var kmRodado in kmList.lista){
                           if(kmRodado.carroId==idCar)kmList.removeObjectLista(kmRodado);
-
                         }
                         for(var periodico in periodicoList.lista){
                           if(periodico.carroId==idCar)periodicoList.removeObjectLista(periodico);
@@ -118,7 +116,14 @@ class CustomCard<T> extends StatelessWidget {
                  )
                 );
                 
-              }, icon: const Icon(Icons.delete))
+              }, child: Container(
+                height: 80,
+                width: 80,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(6.0),),
+                child: const Icon(Icons.delete,size: 40.0,)
+                )
+                )
             ],
       
           ),

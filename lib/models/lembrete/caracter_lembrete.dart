@@ -78,14 +78,21 @@ class LembreteKmRodado extends Lembrete{
   static IconData iconEdit= Icons.edit_road;
   static String kmRodadoName='kmRodado';
   static String kmMesCarro='kmMesCarro';
+  static String dateName='date';
+  static String dateInicial='dataInicial';
+  final DateTime date;
+  final DateTime dataInicial;
   LembreteKmRodado({
     required super.idNotificacao,
     required this.kmRodado,
+    required this.date,
+    required this.dataInicial,
     required super.carroId,
     required super.timeOfDay,
     required super.tag,
     required super.observacao,
-    required super.id});
+    required super.id
+    });
   
 
 }

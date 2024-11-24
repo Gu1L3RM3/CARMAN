@@ -1,4 +1,5 @@
 import 'package:carman/components/cards/custom_card.dart';
+import 'package:carman/components/cards/km_lembrete_card.dart';
 import 'package:carman/components/uso_geral/custom_circular_progress.dart';
 import 'package:carman/components/uso_geral/empty_list.dart';
 import 'package:carman/components/uso_geral/list_view_objects.dart';
@@ -97,15 +98,17 @@ class _LembretesCarPageState extends State<LembretesCarPage> {
               isListEmpty: lembretesList.isEmpty, 
               itemBuilder: (BuildContext context,int index ){
                   if(lembretesList[index] is LembreteKmRodado){
-                  var lembreteKmRodado=lembretesList[index] as LembreteKmRodado;
-                  return CustomCard<LembreteKmRodado>(
-                    object: lembreteKmRodado,
-                    icon: LembreteKmRodado.iconEdit,
-                    principalText: lembreteKmRodado.tag,
-                    leftText: '${lembreteKmRodado.kmRodado}Km',
-                    righttext: lembreteKmRodado.timeOfDay.format(context),
-                    tipoAlert: LembreteKmRodado.tipo,
-                    removeObjectLista: kmList.removeObjectLista);
+                    var lembreteKmRodado=lembretesList[index] as LembreteKmRodado;
+                    return KmLembreteCard(lembrete: lembreteKmRodado,);
+
+                  // return CustomCard<LembreteKmRodado>(
+                  //   object: lembreteKmRodado,
+                  //   icon: LembreteKmRodado.iconEdit,
+                  //   principalText: lembreteKmRodado.tag,
+                  //   leftText: '${lembreteKmRodado.kmRodado}Km',
+                  //   righttext: lembreteKmRodado.timeOfDay.format(context),
+                  //   tipoAlert: LembreteKmRodado.tipo,
+                  //   removeObjectLista: kmList.removeObjectLista);
                   }
                   if(lembretesList[index] is LembreteAgendado){
                   var lembreteAgendado=lembretesList[index] as LembreteAgendado;

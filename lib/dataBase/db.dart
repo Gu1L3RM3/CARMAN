@@ -69,7 +69,9 @@ class DB{
       ${LembreteKmRodado.kmRodadoName} INT,
       ${Lembrete.timeOfDayName} TEXT,
       ${Lembrete.tagName} TEXT,
-      ${Lembrete.observacaoName} TEXT
+      ${Lembrete.observacaoName} TEXT,
+      ${LembreteKmRodado.dateName} TEXT,
+      ${LembreteKmRodado.dateInicial} TEXT
     );
 
   ''';
